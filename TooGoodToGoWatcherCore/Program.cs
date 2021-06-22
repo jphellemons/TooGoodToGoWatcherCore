@@ -69,7 +69,7 @@ namespace TooGoodToGoWatcherCore
         { 
             return new LoginRequest(){
                 Email = "info@jphellemons.nl",
-                Password = "LekkerEten",
+                Password = "Your-password-here",
                 DeviceType = "UNKNOWN"
             };
         }
