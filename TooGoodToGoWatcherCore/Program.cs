@@ -15,8 +15,14 @@ namespace TooGoodToGoWatcherCore
     {
         static async Task Main(string[] args)
         {
-            do {
-                Console.WriteLine();
+            bool continuesRunning = true;
+
+            do
+            {
+                if (!continuesRunning)
+                {
+                    Console.WriteLine();
+                }
 
                 using (ApiHandler apiHandler = new ApiHandler())
                 {
@@ -30,7 +36,12 @@ namespace TooGoodToGoWatcherCore
 
                         foreach (var item in favResponse.Items.Where(i => i.InSalesWindow && i.ItemsAvailable > 0))
                         {
-                            System.Console.WriteLine($"{item.DisplayName}, {item.Item.Price}");
+                            double price = item.Item.Price.MinorUnits;
+                            for (int i = 0; i < item.Item.Price.Decimals; i++)
+                            {
+                                price = price / 10;
+                            }
+                            Console.WriteLine($"{item.DisplayName} has {item.ItemsAvailable} for {price} {item.Item.Price.Code}. Pickup time: {item.PickupInterval.Start.ToString("dd-MM-yyyy HH:mm")} - {item.PickupInterval.End.ToString("dd-MM-yyyy HH:mm")}");
                             /*new ToastContentBuilder()
                                 .AddArgument("action", "viewConversation")
                                 .AddArgument("conversationId", 9813)
@@ -45,23 +56,27 @@ namespace TooGoodToGoWatcherCore
                     }
                 }
 
-/*var options = new JsonSerializerOptions
-{
-    WriteIndented = true,
-    Converters =
-    {
-        new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
-    },
-    PropertyNameCaseInsensitive = true
-};*/
+                /*var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    Converters =
+                    {
+                        new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+                    },
+                    PropertyNameCaseInsensitive = true
+                };*/
 
-
-
-                
-
-                //Console.Read();
-                Console.WriteLine("Waiting for next round. Press Q to continue");
-            } while (Console.ReadKey().Key.Equals(ConsoleKey.Q));
+                if(continuesRunning)
+                {
+                    Console.WriteLine("Sleep for 30 seconds");
+                    await Task.Delay(30000);
+                }
+                else
+                {
+                    Console.WriteLine("Waiting for next round. Press Q to continue");
+                }
+            }
+            while (continuesRunning || Console.ReadKey().Key.Equals(ConsoleKey.Q));
         }
 
     }
