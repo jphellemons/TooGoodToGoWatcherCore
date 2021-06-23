@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TooGoodToGoWatcherCore.DataContracts;
 
-namespace TooGoodToGoWatcherCore
+namespace TooGoodToGoWatcherCore.Handlers
 {
-    public class TooGoodToGoSessionLoader
+    public class TooGoodToGoSessionLoaderHandler
     {
         private const string tgtgSessionFile = "TooGoodToGoSession.json";
 

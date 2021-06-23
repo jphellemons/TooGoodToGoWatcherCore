@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace TooGoodToGoWatcherCore
+namespace TooGoodToGoWatcherCore.DataContracts
 {
     public class Coordinates
     {

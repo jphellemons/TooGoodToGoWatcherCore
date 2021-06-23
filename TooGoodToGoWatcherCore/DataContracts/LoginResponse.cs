@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace TooGoodToGoWatcherCore
+namespace TooGoodToGoWatcherCore.DataContracts
 {
     public partial class LoginResponse
     {
