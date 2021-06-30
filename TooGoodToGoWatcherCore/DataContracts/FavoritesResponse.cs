@@ -22,7 +22,7 @@ namespace TooGoodToGoWatcherCore.DataContracts
         public string DisplayName { get; set; }
 
         [JsonPropertyNameAttribute("pickup_interval")] // nullable
-        public PickupInterval? PickupInterval { get; set; }
+        public PickupInterval PickupInterval { get; set; }
 
         [JsonPropertyNameAttribute("pickup_location")]
         public Location PickupLocation { get; set; }

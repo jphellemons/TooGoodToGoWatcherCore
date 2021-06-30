@@ -7,11 +7,15 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/TooGoodToGoWatcherCore.csproj",
+                "${workspaceFolder}/TooGoodToGoWatcherCore/TooGoodToGoWatcherCore.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "label": "publish",
@@ -19,7 +23,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/TooGoodToGoWatcherCore.csproj",
+                "${workspaceFolder}/TooGoodToGoWatcherCore/TooGoodToGoWatcherCore.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,11 +36,12 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/TooGoodToGoWatcherCore.csproj",
+                "${workspaceFolder}/TooGoodToGoWatcherCore/TooGoodToGoWatcherCore.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": "build"
         }
     ]
 }

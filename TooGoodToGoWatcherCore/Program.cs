@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Microsoft.Toolkit.Uwp.Notifications;
 using TooGoodToGoWatcherCore.DataContracts;
 using TooGoodToGoWatcherCore.Handlers;
 
@@ -42,12 +39,7 @@ namespace TooGoodToGoWatcherCore
                                 price = price / 10;
                             }
                             Console.WriteLine($"{item.DisplayName} has {item.ItemsAvailable} for {price} {item.Item.Price.Code}. Pickup time: {item.PickupInterval.Start.ToString("dd-MM-yyyy HH:mm")} - {item.PickupInterval.End.ToString("dd-MM-yyyy HH:mm")}");
-                            /*new ToastContentBuilder()
-                                .AddArgument("action", "viewConversation")
-                                .AddArgument("conversationId", 9813)
-                                .AddText(item.DisplayName)
-                                .AddText("Check this out, The Enchantments in Washington!")
-                                .Show();*/
+                            Console.Beep();
                         }
                     }
                     else
@@ -56,17 +48,7 @@ namespace TooGoodToGoWatcherCore
                     }
                 }
 
-                /*var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true,
-                    Converters =
-                    {
-                        new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
-                    },
-                    PropertyNameCaseInsensitive = true
-                };*/
-
-                if(continuesRunning)
+                if (continuesRunning)
                 {
                     Console.WriteLine("Sleep for 30 seconds");
                     await Task.Delay(30000);
@@ -78,6 +60,5 @@ namespace TooGoodToGoWatcherCore
             }
             while (continuesRunning || Console.ReadKey().Key.Equals(ConsoleKey.Q));
         }
-
     }
 }

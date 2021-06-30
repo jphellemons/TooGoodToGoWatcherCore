@@ -26,7 +26,7 @@ namespace TooGoodToGoWatcherCore.Handlers
         {
             using (Stream stream = File.OpenWrite(tgtgSessionFile))
             {
-                JsonSerializer.SerializeAsync(stream, loginResponse);
+                await JsonSerializer.SerializeAsync(stream, loginResponse);
             }
         }
     }
