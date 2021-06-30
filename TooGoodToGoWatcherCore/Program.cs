@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using TooGoodToGoWatcherCore.DataContracts;
 using TooGoodToGoWatcherCore.Handlers;
 
@@ -13,6 +14,11 @@ namespace TooGoodToGoWatcherCore
         static async Task Main(string[] args)
         {
             bool continuesRunning = true;
+            var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+            
+            var secretProvider = config.Providers.First();
+            if (!secretProvider.TryGet("Email", out var mail) ) return;
+            if (!secretProvider.TryGet("Password", out var password) ) return;
 
             do
             {
@@ -21,7 +27,7 @@ namespace TooGoodToGoWatcherCore
                     Console.WriteLine();
                 }
 
-                using (ApiHandler apiHandler = new ApiHandler())
+                using (ApiHandler apiHandler = new ApiHandler(mail, password))
                 {
                     var loginResponse = await apiHandler.GetSession();
                     var lfResponse = await apiHandler.GetFavoriteList(loginResponse);

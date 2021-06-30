@@ -12,9 +12,13 @@ namespace TooGoodToGoWatcherCore.Handlers
         private const string tgtgApi = "https://apptoogoodtogo.com/api/";
 
         private HttpClient httpClient;
+        private string mail;
+        private string password;
 
-        public ApiHandler()
+        public ApiHandler(string mail, string password)
         {
+            this.mail = mail;
+            this.password = password;
             httpClient = new HttpClient();
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -76,8 +80,8 @@ namespace TooGoodToGoWatcherCore.Handlers
         {
             return new LoginRequest()
             {
-                Email = "info@jphellemons.nl",
-                Password = "Your-password-here",
+                Email = mail,
+                Password = password,
                 DeviceType = "UNKNOWN"
             };
         }
