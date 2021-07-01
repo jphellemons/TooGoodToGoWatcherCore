@@ -19,6 +19,10 @@ namespace TooGoodToGoWatcherCore
             var secretProvider = config.Providers.First();
             if (!secretProvider.TryGet("Email", out var mail) ) return;
             if (!secretProvider.TryGet("Password", out var password) ) return;
+            if (!secretProvider.TryGet("IftttEventName", out var iftttEventName) ) return;
+            if (!secretProvider.TryGet("IftttKey", out var iftttKey) ) return;
+
+            var iNotifier = new IftttNotifier(iftttEventName, iftttKey);
 
             do
             {
@@ -46,6 +50,8 @@ namespace TooGoodToGoWatcherCore
                             }
                             Console.WriteLine($"{item.DisplayName} has {item.ItemsAvailable} for {price} {item.Item.Price.Code}. Pickup time: {item.PickupInterval.Start.ToString("dd-MM-yyyy HH:mm")} - {item.PickupInterval.End.ToString("dd-MM-yyyy HH:mm")}");
                             Console.Beep();
+
+                            iNotifier.Notify(item);
                         }
                     }
                     else
