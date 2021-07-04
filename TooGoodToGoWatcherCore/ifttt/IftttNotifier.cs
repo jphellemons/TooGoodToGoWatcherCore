@@ -31,7 +31,7 @@ namespace TooGoodToGoWatcherCore
                 var payload = new IftttPayload(){ 
                     value1= item.DisplayName, 
                     value2 = $"{price} {item.Item.Price.Code}", 
-                    value3 = $"Pickup time: {item.PickupInterval.Start.ToString("dd-MM-yyyy HH:mm")} - {item.PickupInterval.End.ToString("dd-MM-yyyy HH:mm")}"
+                    value3 = $"Pickup time: {item.PickupInterval.Start.ToLocalTime()} - {item.PickupInterval.End.ToLocalTime()}"
                     };
                 var _httpClient = new HttpClient();
                 var result = await _httpClient.PostAsJsonAsync(iftttUrl, payload);

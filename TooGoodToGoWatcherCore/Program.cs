@@ -48,7 +48,7 @@ namespace TooGoodToGoWatcherCore
                             {
                                 price = price / 10;
                             }
-                            Console.WriteLine($"{item.DisplayName} has {item.ItemsAvailable} for {price} {item.Item.Price.Code}. Pickup time: {item.PickupInterval.Start.ToString("dd-MM-yyyy HH:mm")} - {item.PickupInterval.End.ToString("dd-MM-yyyy HH:mm")}");
+                            Console.WriteLine($"{item.DisplayName} has {item.ItemsAvailable} for {price} {item.Item.Price.Code}. Pickup time: {item.PickupInterval.Start.ToLocalTime()} - {item.PickupInterval.End.ToLocalTime()}");
                             Console.Beep();
 
                             iNotifier.Notify(item);
@@ -63,7 +63,7 @@ namespace TooGoodToGoWatcherCore
                 if (continuesRunning)
                 {
                     Console.WriteLine("Sleep for 30 seconds");
-                    await Task.Delay(30000);
+                    await Task.Delay(60000);
                 }
                 else
                 {
