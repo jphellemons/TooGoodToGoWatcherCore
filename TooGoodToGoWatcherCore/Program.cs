@@ -56,13 +56,20 @@ namespace TooGoodToGoWatcherCore
                     }
                     else
                     {
-                        Console.WriteLine($"Loading Favorite failed with code {lfResponse.StatusCode}");
+                        if (lfResponse.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            apiHandler.ResetSession();
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Loading Favorite failed with code {lfResponse.StatusCode}");
+                        }
                     }
                 }
 
                 if (continuesRunning)
                 {
-                    Console.WriteLine("Sleep for 30 seconds");
+                    Console.WriteLine("Sleep for 60 seconds");
                     await Task.Delay(60000);
                 }
                 else

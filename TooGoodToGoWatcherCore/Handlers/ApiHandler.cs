@@ -85,5 +85,11 @@ namespace TooGoodToGoWatcherCore.Handlers
                 DeviceType = "UNKNOWN"
             };
         }
+
+        internal void ResetSession()
+        {
+            TooGoodToGoSessionLoaderHandler tooGoodToGoSessionLoader = new TooGoodToGoSessionLoaderHandler();
+            tooGoodToGoSessionLoader.Reset();
+        }
     }
 }

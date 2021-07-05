@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TooGoodToGoWatcherCore.DataContracts;
@@ -28,6 +29,11 @@ namespace TooGoodToGoWatcherCore.Handlers
             {
                 await JsonSerializer.SerializeAsync(stream, loginResponse);
             }
+        }
+
+        internal void Reset()
+        {
+            File.Delete(tgtgSessionFile);
         }
     }
 }
