@@ -20,6 +20,10 @@ namespace TooGoodToGoWatcherCore
         {
             try
             {
+                if(string.IsNullOrEmpty(iftttEventName) || string.IsNullOrEmpty(iftttKey))
+                {
+                    return;
+                }
                 string iftttUrl = $"https://maker.ifttt.com/trigger/{iftttEventName}/with/key/{iftttKey}";
 
                 double price = item.Item.Price.MinorUnits;

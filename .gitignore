@@ -447,3 +447,4 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 TooGoodToGoSession.json
+secrets.json
