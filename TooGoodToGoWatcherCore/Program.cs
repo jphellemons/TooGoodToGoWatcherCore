@@ -48,7 +48,7 @@ namespace TooGoodToGoWatcherCore
                             {
                                 price = price / 10;
                             }
-                            Console.WriteLine($"{item.DisplayName} has {item.ItemsAvailable} for {price} {item.Item.Price.Code}. Pickup time: {item.PickupInterval.Start.ToLocalTime()} - {item.PickupInterval.End.ToLocalTime()}");
+                            Console.WriteLine($"{item.DisplayName} has {item.ItemsAvailable} for {price.ToString("C")} {item.Item.Price.Code}. Pickup time: {item.PickupInterval.Start.ToLocalTime()} - {item.PickupInterval.End.ToLocalTime()}");
                             Console.Beep();
 
                             iNotifier.Notify(item);

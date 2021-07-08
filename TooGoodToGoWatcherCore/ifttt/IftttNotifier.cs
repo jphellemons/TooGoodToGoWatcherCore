@@ -34,13 +34,17 @@ namespace TooGoodToGoWatcherCore
 
                 var payload = new IftttPayload(){ 
                     value1= item.DisplayName, 
-                    value2 = $"{price} {item.Item.Price.Code}", 
+                    value2 = $"{price.ToString("C")} {item.Item.Price.Code}", 
                     value3 = $"Pickup time: {item.PickupInterval.Start.ToLocalTime()} - {item.PickupInterval.End.ToLocalTime()}"
                     };
                 var _httpClient = new HttpClient();
                 var result = await _httpClient.PostAsJsonAsync(iftttUrl, payload);
-                System.Console.WriteLine(result.StatusCode);
-                System.Console.WriteLine(await result.Content.ReadAsStringAsync());
+                
+                if (result.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    System.Console.WriteLine(result.StatusCode);
+                    System.Console.WriteLine(await result.Content.ReadAsStringAsync());
+                }
             }
             catch (Exception ex)
             {
