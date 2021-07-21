@@ -4,7 +4,7 @@
 # to-do items
 Please look at issues
 
-#how to run
+# how to run
 open in vs (code)
 ```
 dotnet user-secrets set "Email" "your@mail"
