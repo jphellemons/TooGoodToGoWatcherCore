@@ -7,7 +7,7 @@ namespace TooGoodToGoWatcherCore.DataContracts
     public partial class FavoriteResponse
     {
         [JsonPropertyNameAttribute("items")]
-        public List<ItemElement> Items { get; set; }
+        public List<ItemElement> Items { get; set; }      
     }
 
     public partial class ItemElement
@@ -47,6 +47,23 @@ namespace TooGoodToGoWatcherCore.DataContracts
 
         [JsonPropertyNameAttribute("new_item")]
         public bool NewItem { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is ItemElement element &&
+                   //EqualityComparer<ItemItem>.Default.Equals(Item, element.Item) &&
+                   //EqualityComparer<Store>.Default.Equals(Store, element.Store) &&
+                   DisplayName == element.DisplayName &&
+                   //EqualityComparer<PickupInterval>.Default.Equals(PickupInterval, element.PickupInterval) &&
+                   //EqualityComparer<Location>.Default.Equals(PickupLocation, element.PickupLocation) &&
+                   //EqualityComparer<DateTimeOffset?>.Default.Equals(PurchaseEnd, element.PurchaseEnd) &&
+                   ItemsAvailable == element.ItemsAvailable &&
+                   //EqualityComparer<DateTimeOffset?>.Default.Equals(SoldOutAt, element.SoldOutAt) &&
+                   //Distance == element.Distance &&
+                   Favorite == element.Favorite &&
+                   InSalesWindow == element.InSalesWindow &&
+                   NewItem == element.NewItem;
+        }
     }
 
     public partial class ItemItem

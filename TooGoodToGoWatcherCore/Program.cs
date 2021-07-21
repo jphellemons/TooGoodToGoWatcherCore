@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http.Json;
@@ -23,7 +24,7 @@ namespace TooGoodToGoWatcherCore
             if (!secretProvider.TryGet("IftttKey", out var iftttKey) ) return;
 
             var iNotifier = new IftttNotifier(iftttEventName, iftttKey);
-
+            var previousFavResponse = new List<ItemElement>();
             do
             {
                 if (!continuesRunning)
@@ -41,17 +42,22 @@ namespace TooGoodToGoWatcherCore
                         var debugResponse = await lfResponse.Content.ReadAsStringAsync();
                         var favResponse = await lfResponse.Content.ReadFromJsonAsync<FavoriteResponse>();
 
-                        foreach (var item in favResponse.Items.Where(i => i.InSalesWindow && i.ItemsAvailable > 0))
+                        var availableFav = favResponse.Items.Where(i => i.InSalesWindow && i.ItemsAvailable > 0).ToList();
+                        if (!previousFavResponse.SequenceEqual(availableFav))
                         {
-                            double price = item.Item.Price.MinorUnits;
-                            for (int i = 0; i < item.Item.Price.Decimals; i++)
+                            foreach (var item in availableFav)
                             {
-                                price = price / 10;
-                            }
-                            Console.WriteLine($"{item.DisplayName} has {item.ItemsAvailable} for {price.ToString("C")} {item.Item.Price.Code}. Pickup time: {item.PickupInterval.Start.ToLocalTime()} - {item.PickupInterval.End.ToLocalTime()}");
-                            Console.Beep();
+                                double price = item.Item.Price.MinorUnits;
+                                for (int i = 0; i < item.Item.Price.Decimals; i++)
+                                {
+                                    price = price / 10;
+                                }
+                                Console.WriteLine($"{item.DisplayName} has {item.ItemsAvailable} for {price.ToString("C")} {item.Item.Price.Code}. Pickup time: {item.PickupInterval.Start.ToLocalTime()} - {item.PickupInterval.End.ToLocalTime()}");
+                                Console.Beep();
 
-                            iNotifier.Notify(item);
+                                iNotifier.Notify(item);
+                            }
+                            previousFavResponse = availableFav;
                         }
                     }
                     else
