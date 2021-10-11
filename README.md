@@ -1,6 +1,7 @@
 # TooGoodToGoWatcherCore
  .net Core 5.x implementation of TooGoodToGoWachter
 
+![dotnet workflow](https://github.com/jphellemons/TooGoodToGoWatcherCore/actions/workflows/dotnet.yml/badge.svg)
 # to-do items
 Please look at issues
 
