@@ -23,6 +23,7 @@ namespace TooGoodToGoWatcherCore.Handlers
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             httpClient.DefaultRequestHeaders.Add("Accept-Language", "en-US");
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "TooGoodToGo/21.9.0 (813) (iPhone/iPhone 7 (GSM); iOS 15.1; Scale/2.00)");
         }
 
         ~ ApiHandler()
