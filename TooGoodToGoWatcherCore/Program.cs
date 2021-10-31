@@ -17,44 +17,10 @@ namespace TooGoodToGoWatcherCore
 {
     class Program
     {
-        public static ILoggerFactory LogFactory { get; } = LoggerFactory.Create(builder =>
-        {
-            builder.ClearProviders();
-            // Clear Microsoft's default providers (like eventlogs and others)
-            builder.AddSimpleConsole(options =>
-            {
-                options.IncludeScopes = true;
-                options.SingleLine = true;
-                options.TimestampFormat = "hh:mm:ss ";
-            }).SetMinimumLevel(LogLevel.Warning);
-        });
-
-        public static ILogger<T> CreateLogger<T>() => LogFactory.CreateLogger<T>();
-
         static async Task Main(string[] args)
         {
             IHostBuilder hostBuilder = Startup.ConfigureServices();
             await hostBuilder.RunConsoleAsync();
-
-            //ILogger logger = CreateLogger<Program>();
-
-            //// Create service collection
-            //logger.LogInformation("Creating service collection");
-            //ServiceCollection serviceCollection = new ServiceCollection();
-            //await ConfigureServices(serviceCollection);
-
-            //// Create service provider
-            //logger.LogInformation("Building service provider");
-            //IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
-
-            ////Secrets secrets = new Secrets();
-            ////var config = serviceProvider.GetService<IConfiguration>();
-            ////config.Bind(secrets);
-
-            //// Create service provider
-            //logger.LogInformation("Starting TooGoodToGoWatcherCore");
-            //ICoreWatcher coreWatcher = serviceProvider.GetService<ICoreWatcher>();
-            //await coreWatcher.Run();
         }
     }
 }
