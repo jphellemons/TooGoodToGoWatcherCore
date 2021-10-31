@@ -1,17 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Media;
 using System.Net;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TooGoodToGoWatcherCore.DataContracts;
 using TooGoodToGoWatcherCore.Handlers;
-using TooGoodToGoWatcherCore.Models;
 
 namespace TooGoodToGoWatcherCore
 {
