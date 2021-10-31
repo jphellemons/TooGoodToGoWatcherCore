@@ -38,11 +38,6 @@ namespace TooGoodToGoWatcherCore
             var previousFavResponse = new List<ItemElement>();
             do
             {
-                if (!cancellationTokenSource.IsCancellationRequested)
-                {
-                    Console.WriteLine();
-                }
-
                 var loginResponse = await apiHandler.GetSession();
                 var lfResponse = await apiHandler.GetFavoriteList(loginResponse);
 
