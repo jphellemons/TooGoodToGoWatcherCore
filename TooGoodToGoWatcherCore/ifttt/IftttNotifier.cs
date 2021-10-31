@@ -2,18 +2,19 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using TooGoodToGoWatcherCore.DataContracts;
+using TooGoodToGoWatcherCore.Models;
 
 namespace TooGoodToGoWatcherCore
 {
-    public class IftttNotifier
+    public class IftttNotifier : IIftttNotifier
     {
         private string iftttEventName;
         private string iftttKey;
 
-        public IftttNotifier(string iftttEventName, string iftttKey)
+        public IftttNotifier(Secrets secrets)
         {
-            this.iftttEventName = iftttEventName;
-            this.iftttKey = iftttKey;
+            this.iftttEventName = secrets.IftttEventName;
+            this.iftttKey = secrets.IftttKey;
         }
 
         public async void Notify(ItemElement item)

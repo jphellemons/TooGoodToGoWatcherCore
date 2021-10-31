@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TooGoodToGoWatcherCore.Handlers
 {
-    public class ConfigurationHandler : IConfigurationHandler
+    public interface ISoundHandler
     {
-
+        void PlaySound();
     }
 }

@@ -6,9 +6,14 @@ using TooGoodToGoWatcherCore.DataContracts;
 
 namespace TooGoodToGoWatcherCore.Handlers
 {
-    public class TooGoodToGoSessionLoaderHandler
+    public class TooGoodToGoSessionLoaderHandler : ITooGoodToGoSessionLoaderHandler
     {
         private const string tgtgSessionFile = "TooGoodToGoSession.json";
+
+        public TooGoodToGoSessionLoaderHandler()
+        {
+
+        }
 
         public async Task<LoginResponse> Load()
         {
@@ -31,7 +36,7 @@ namespace TooGoodToGoWatcherCore.Handlers
             }
         }
 
-        internal void Reset()
+        public void Reset()
         {
             File.Delete(tgtgSessionFile);
         }
