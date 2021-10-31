@@ -22,19 +22,17 @@ namespace TooGoodToGoWatcherCore
 
         private IApiHandler apiHandler;
         private IIftttNotifier iftttNotifier;
-        private Settings settings;
+        private ISoundHandler soundHandler;
 
-        public CoreWatcher(IApiHandler apiHandler, IIftttNotifier iftttNotifier, Settings settings)
+        public CoreWatcher(IApiHandler apiHandler, IIftttNotifier iftttNotifier, ISoundHandler soundHandler)
         {
             this.apiHandler = apiHandler;
             this.iftttNotifier = iftttNotifier;
-            this.settings = settings;
+            this.soundHandler = soundHandler;
         }
 
         public async Task Run()
         {
-            SoundPlayer player = new SoundPlayer(settings.SoundFile);
-
             var previousFavResponse = new List<ItemElement>();
             do
             {
@@ -58,15 +56,7 @@ namespace TooGoodToGoWatcherCore
                             }
                             Console.WriteLine($"{item.DisplayName} has {item.ItemsAvailable} for {price.ToString("C")} {item.Item.Price.Code}. Pickup time: {item.PickupInterval.Start.ToLocalTime()} - {item.PickupInterval.End.ToLocalTime()}");
 
-                            if (settings.ConsoleBeepOnNotification)
-                            {
-                                Console.Beep();
-                            }
-
-                            if (settings.SoundOnNotification)
-                            {
-                                player.Play();
-                            }
+                            soundHandler.PlaySound();
 
                             iftttNotifier.Notify(item);
                         }

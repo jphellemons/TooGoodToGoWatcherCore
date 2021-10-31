@@ -57,6 +57,7 @@ namespace TooGoodToGoWatcherCore
             serviceCollection.AddTransient<IConfigurationHandler, ConfigurationHandler>();
             serviceCollection.AddTransient<ITooGoodToGoSessionLoaderHandler, TooGoodToGoSessionLoaderHandler>();
 
+            serviceCollection.AddTransient<ISoundHandler, SoundHandler>();
             serviceCollection.AddTransient<IIftttNotifier, IftttNotifier>();
 
             //Load CoreWatcher
