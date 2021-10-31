@@ -4,10 +4,11 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using TooGoodToGoWatcherCore.DataContracts;
+using TooGoodToGoWatcherCore.Models;
 
 namespace TooGoodToGoWatcherCore.Handlers
 {
-    public class ApiHandler : IDisposable
+    public class ApiHandler : IApiHandler, IDisposable
     {
         private const string tgtgApi = "https://apptoogoodtogo.com/api/";
 
@@ -15,10 +16,10 @@ namespace TooGoodToGoWatcherCore.Handlers
         private string mail;
         private string password;
 
-        public ApiHandler(string mail, string password)
+        public ApiHandler(Secrets secrets)
         {
-            this.mail = mail;
-            this.password = password;
+            this.mail = secrets.Email;
+            this.password = secrets.Password;
             httpClient = new HttpClient();
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -65,7 +66,7 @@ namespace TooGoodToGoWatcherCore.Handlers
             return lfResponse;
         }
 
-        private ListFavorites GetListFavorites(long userId)
+        public ListFavorites GetListFavorites(long userId)
         {
             return new ListFavorites()
             {
@@ -76,7 +77,7 @@ namespace TooGoodToGoWatcherCore.Handlers
             };
         }
 
-        private LoginRequest GetLoginRequest()
+        public LoginRequest GetLoginRequest()
         {
             return new LoginRequest()
             {
@@ -86,7 +87,7 @@ namespace TooGoodToGoWatcherCore.Handlers
             };
         }
 
-        internal void ResetSession()
+        public void ResetSession()
         {
             TooGoodToGoSessionLoaderHandler tooGoodToGoSessionLoader = new TooGoodToGoSessionLoaderHandler();
             tooGoodToGoSessionLoader.Reset();

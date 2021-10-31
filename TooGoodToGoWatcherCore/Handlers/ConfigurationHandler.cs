@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TooGoodToGoWatcherCore.Handlers
 {
-    public class ConfigurationHandler
+    public class ConfigurationHandler : IConfigurationHandler
     {
 
     }
