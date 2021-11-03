@@ -45,13 +45,13 @@ namespace TooGoodToGoWatcherCore
                     {
                         foreach (var item in availableFav)
                         {
-                            double price = item.Item.Price.MinorUnits;
-                            for (int i = 0; i < item.Item.Price.Decimals; i++)
+                            double price = item.Item.PriceIncludingTaxes.MinorUnits;
+                            for (int i = 0; i < item.Item.PriceIncludingTaxes.Decimals; i++)
                             {
                                 price = price / 10;
                             }
-                            Console.WriteLine($"{item.DisplayName} has {item.ItemsAvailable} for {price.ToString("C")} {item.Item.Price.Code}. Pickup time: {item.PickupInterval.Start.ToLocalTime()} - {item.PickupInterval.End.ToLocalTime()}");
-
+                            Console.WriteLine($"{item.DisplayName} has {item.ItemsAvailable} for {price.ToString("C")} {item.Item.PriceIncludingTaxes.Code}. Pickup time: {item.PickupInterval.Start.ToLocalTime()} - {item.PickupInterval.End.ToLocalTime()}");
+                            
                             soundHandler.PlaySound();
 
                             iftttNotifier.Notify(item);

@@ -71,9 +71,6 @@ namespace TooGoodToGoWatcherCore.DataContracts
         [JsonPropertyNameAttribute("item_id")]
         public long ItemId { get; set; }
 
-        [JsonPropertyNameAttribute("price")]
-        public Price Price { get; set; }
-
         [JsonPropertyNameAttribute("sales_taxes")]
         public object[] SalesTaxes { get; set; }
 

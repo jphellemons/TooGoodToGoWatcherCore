@@ -27,15 +27,15 @@ namespace TooGoodToGoWatcherCore
                 }
                 string iftttUrl = $"https://maker.ifttt.com/trigger/{iftttEventName}/with/key/{iftttKey}";
 
-                double price = item.Item.Price.MinorUnits;
-                for (int i = 0; i < item.Item.Price.Decimals; i++)
+                double price = item.Item.PriceIncludingTaxes.MinorUnits;
+                for (int i = 0; i < item.Item.PriceIncludingTaxes.Decimals; i++)
                 {
                     price = price / 10;
                 }
 
                 var payload = new IftttPayload(){ 
                     value1= item.DisplayName, 
-                    value2 = $"{price.ToString("C")} {item.Item.Price.Code}", 
+                    value2 = $"{price.ToString("C")} {item.Item.PriceIncludingTaxes.Code}", 
                     value3 = $"Pickup time: {item.PickupInterval.Start.ToLocalTime()} - {item.PickupInterval.End.ToLocalTime()}"
                     };
                 var _httpClient = new HttpClient();
